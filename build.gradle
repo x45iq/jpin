@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+version "1.0.0"
+group "com.purplerat"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation libs.slf4j.api
+    testImplementation libs.slf4j.reload4j
+    implementation libs.jsoup
+    implementation libs.gson
+    testImplementation libs.junit
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+wrapper {
+    gradleVersion "8.5"
+}
